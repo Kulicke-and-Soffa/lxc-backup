@@ -20,5 +20,5 @@ do
       EXCLUDES+=("--exclude='${LXC_CONTAINER}${EXCLUDE}'")
     done
 
-    tar --numeric-owner --verbose -cf ${BACKUP_TARGET}/${BACKUP_PREFIX}-${LXC_CONTAINER}.tar.bz2 -C ${LXC_PATH} ${LXC_CONTAINER} ${EXCLUDES[@]}
+    tar --numeric-owner --verbose ${EXCLUDES[@]} -cf ${BACKUP_TARGET}/${BACKUP_PREFIX}-${LXC_CONTAINER}.tar.bz2 -C ${LXC_PATH} ${LXC_CONTAINER}
 done
