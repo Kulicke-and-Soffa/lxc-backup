@@ -12,7 +12,7 @@ TAR_EXCLUDE_PATTERNS=("/SNAPSHOTS /snaps")
 
 LXC_PATH=$(lxc-config lxc.lxcpath)
 LXC_CONTAINERS=$(lxc-ls)
-
+LXC_CONTAINERS_ACTIVE=$(lxc-ls --active)
 
 # EXECUTION
 
@@ -21,9 +21,13 @@ if [ 0 == ${#LXC_CONTAINERS[@]} ]; then
     exit 1;
 fi
 
+if [ ${#LXC_CONTAINERS_ACTIVE[@]} -gt 0 ]; then
+    echo -e "${LXC_CONTAINERS_ACTIVE[@]} still active!"
+    exit 1;
+fi
+
 for LXC_CONTAINER in ${LXC_CONTAINERS}
 do
-    lxc-info --name ${LXC_CONTAINER} -s | awk {'print $2'}
     EXLUDES=()
     for EXCLUDE in ${TAR_EXCLUDE_PATTERNS}
     do
