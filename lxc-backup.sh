@@ -16,7 +16,6 @@ LXC_CONTAINERS_ACTIVE=$(lxc-ls --active)
 
 # EXECUTION
 
-
   # ERROR CHECKING
 
     if [ 0 == ${#LXC_CONTAINERS[@]} ]; then
