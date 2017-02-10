@@ -4,7 +4,7 @@
 # CONGIGURATION
 
 BACKUP_TARGET=~/
-BACKUP_PREFIX=$(date +%Y%m%d%H%M%S)
+BACKUP_PREFIX=$(date +%Y%m%dt%H%M%S)
 
 
 # INITIALISATION
