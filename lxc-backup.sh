@@ -26,7 +26,7 @@ if [ ${#LXC_CONTAINERS_ACTIVE[@]} -gt 0 ]; then
     echo -e "${LXC_CONTAINERS_ACTIVE[@]}"
     echo -e "---"
     echo -e "Are still active (either running or frozen)!"
-    exit 1;
+#    exit 1;
 fi
 
 for LXC_CONTAINER in ${LXC_CONTAINERS}
