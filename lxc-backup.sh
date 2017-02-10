@@ -23,7 +23,7 @@ fi
 
 for LXC_CONTAINER in ${LXC_CONTAINERS}
 do
-    if [ lxc-info --name LXC_CONTAINER -s | awk {'print $2'}
+    lxc-info --name ${LXC_CONTAINER} -s | awk {'print $2'}
     EXLUDES=()
     for EXCLUDE in ${TAR_EXCLUDE_PATTERNS}
     do
