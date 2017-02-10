@@ -22,7 +22,10 @@ if [ 0 == ${#LXC_CONTAINERS[@]} ]; then
 fi
 
 if [ ${#LXC_CONTAINERS_ACTIVE[@]} -gt 0 ]; then
-    echo -e "${LXC_CONTAINERS_ACTIVE[@]} still active!"
+    echo -e "---"
+    echo -e "${LXC_CONTAINERS_ACTIVE[@]}"
+    echo -e "---"
+    echo -e "Are still running!"
     exit 1;
 fi
 
