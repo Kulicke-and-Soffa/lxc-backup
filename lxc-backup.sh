@@ -3,7 +3,7 @@
 
 # CONGIGURATION
 
-BACKUP_TARGET=~/
+BACKUP_TARGET=/srv/lxc/BACKUPS
 BACKUP_PREFIX=$(date +%Y%m%dt%H%M%S)
 
 
