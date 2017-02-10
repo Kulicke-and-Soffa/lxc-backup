@@ -16,6 +16,7 @@ LXC_CONTAINERS_ACTIVE=$(lxc-ls --active)
 
 # EXECUTION
 
+
   # ERROR CHECKING
 
     if [ 0 == ${#LXC_CONTAINERS[@]} ]; then
@@ -30,7 +31,8 @@ LXC_CONTAINERS_ACTIVE=$(lxc-ls --active)
         echo -e "Are still active (either running or frozen)!"
     #    exit 1;
     fi
-  
+
+
   # ACTUAL TARRING
 
     for LXC_CONTAINER in ${LXC_CONTAINERS}
