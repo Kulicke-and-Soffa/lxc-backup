@@ -11,7 +11,7 @@ BACKUP_PREFIX=$(date +%Y%m%dt%H%M%S)
 
 LXC_PATH=$(lxc-config lxc.lxcpath)
 LXC_CONTAINERS=$(lxc-ls)
-LXC_CONTAINERS_ACTIVE=$(lxc-ls --active)
+LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
 
 
 # EXECUTION
