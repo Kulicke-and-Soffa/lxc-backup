@@ -34,7 +34,7 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
 
   # ACTUAL TARRING
 
-    for LXC_CONTAINER in ${LXC_CONTAINERS}
+    for LXC_CONTAINER in ${LXC_CONTAINERS[@]}
     do
         tar --numeric-owner --verbose -cf ${BACKUP_TARGET}/${BACKUP_PREFIX}-${LXC_CONTAINER}.tar.bz2 -C ${LXC_PATH} ${LXC_CONTAINER}
     done
