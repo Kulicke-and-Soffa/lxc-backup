@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 
-# CONGIGURATION
+# CONFIGURATION
 
-BACKUP_TARGET=/srv/BACKUPS
+BACKUP_TARGET=/srv/backups
 BACKUP_PREFIX=$(date +%Y%m%dt%H%M%S)
 
 
