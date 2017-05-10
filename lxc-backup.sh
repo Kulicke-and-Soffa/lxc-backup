@@ -27,7 +27,7 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
         echo -e "---"
         echo -e "${LXC_CONTAINERS_ACTIVE[@]}"
         echo -e "---"
-        echo -e "Are still active (either running or frozen)!"
+        echo -e "still active (either running or frozen)!"
         exit 1;
     fi
 
