@@ -39,7 +39,7 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
     do
         lxc-attach -n ${LXC_CONTAINER} -- sh -c "apt-get autoclean" && \
         lxc-stop -t 5 -n ${LXC_CONTAINER} && \
-        echo "  Pre-backup auto-snapshot $(date +%Y%m%dt%H%M%S)" > ${SNAPSHOT_RELNOTE}  && \
+        echo "  - Pre-backup auto-snapshot $(date +%Y%m%dt%H%M%S)" > ${SNAPSHOT_RELNOTE}  && \
         lxc-snapshot -c ${SNAPSHOT_RELNOTE} -n ${LXC_CONTAINER} && \
         tar --numeric-owner -czvf ${BACKUP_TARGET}/${BACKUP_PREFIX}-${LXC_CONTAINER}.tar.gz -C ${LXC_PATH} --exclude=${LXC_CONTAINER}/snaps ${LXC_CONTAINER}  && \
         lxc-start -n ${LXC_CONTAINER}
