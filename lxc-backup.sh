@@ -5,6 +5,7 @@
 
 BACKUP_TARGET=/srv/lxc/BACKUPS
 BACKUP_PREFIX=$(date +%Y%m%dt%H%M%S)
+SNAPSHOT_RELNOTE=/srv/lxc/backup-relnote
 
 
 # INITIALISATION
@@ -23,13 +24,13 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
         exit 1;
     fi
 
-    if [ ${#LXC_CONTAINERS_ACTIVE[@]} -gt 0 ]; then
-        echo -e "---"
-        echo -e "${LXC_CONTAINERS_ACTIVE[@]}"
-        echo -e "---"
-        echo -e "still active (either running or frozen)!"
-        exit 1;
-    fi
+#    if [ ${#LXC_CONTAINERS_ACTIVE[@]} -gt 0 ]; then
+#        echo -e "---"
+#        echo -e "${LXC_CONTAINERS_ACTIVE[@]}"
+#        echo -e "---"
+#        echo -e "still active (either running or frozen)!"
+#        exit 1;
+#    fi
 
 
   # ACTUAL TARRING
@@ -37,5 +38,9 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
     for LXC_CONTAINER in ${LXC_CONTAINERS[@]}
     do
         lxc-attach -n ${LXC_CONTAINER} -- sh -c "apt-get autoclean" && \
-        tar --numeric-owner -czvf ${BACKUP_TARGET}/${BACKUP_PREFIX}-${LXC_CONTAINER}.tar.gz -C ${LXC_PATH} --exclude=${LXC_CONTAINER}/snaps ${LXC_CONTAINER}
+        lxc-stop -t 5 -n ${LXC_CONTAINER} && \
+        echo "  Pre-backup auto-snapshot $(date +%Y%m%dt%H%M%S)" > ${SNAPSHOT_RELNOTE}  && \
+        lxc-snapshot -c ${SNAPSHOT_RELNOTE} -n ${LXC_CONTAINER} && \
+        tar --numeric-owner -czvf ${BACKUP_TARGET}/${BACKUP_PREFIX}-${LXC_CONTAINER}.tar.gz -C ${LXC_PATH} --exclude=${LXC_CONTAINER}/snaps ${LXC_CONTAINER}  && \
+        lxc-start -n ${LXC_CONTAINER}
     done
