@@ -36,5 +36,6 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
 
     for LXC_CONTAINER in ${LXC_CONTAINERS[@]}
     do
+        lxc-attach -n ${LXC_CONTAINER} -- sh -c "apt-get autoclean" && \
         tar --numeric-owner -czvf ${BACKUP_TARGET}/${BACKUP_PREFIX}-${LXC_CONTAINER}.tar.gz -C ${LXC_PATH} --exclude=${LXC_CONTAINER}/snaps ${LXC_CONTAINER}
     done
