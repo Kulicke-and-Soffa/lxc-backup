@@ -37,7 +37,7 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
 
     for LXC_CONTAINER in ${LXC_CONTAINERS[@]}
     do
-        lxc-attach -n ${LXC_CONTAINER} -- sh -c "apt-get autoclean" && \
+        lxc-attach -n ${LXC_CONTAINER} -- sh -c "apt-get clean" && \
         lxc-stop -t 5 -n ${LXC_CONTAINER} && \
         echo "  - Pre-backup auto-snapshot $(date +%Y%m%dt%H%M%S)" > ${SNAPSHOT_RELNOTE}  && \
         lxc-snapshot -c ${SNAPSHOT_RELNOTE} -n ${LXC_CONTAINER} && \
