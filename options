@@ -1,0 +1,44 @@
+function printHelp () {
+    echo -e "LXC-BACKUP - Container tar based backup/migration tool (2018, GNU GENERAL PUBLIC LICENSE)\n"
+    echo -e "USAGE: lxc-backup -a |w \"/path [/path2]\" [...] [-e] [-v]\n"
+    echo -e "Arguments:"
+    echo -e "   -r Read permission check (for provided quoted (!) paths)"
+    echo -e "   -w Write permission check (for provided quoted (!) paths)"
+    echo -e "   -e Empty-check mode (errors if a dir to r/w is empty)"
+    echo -e "   -v Verbose mode (provides more feedback)"
+    echo -e "   -h Prints this helptext."
+  }
+
+  function getInput () {
+    local OPTIND r w e v d h option
+    while getopts r:w:evdh option
+    do
+      case "${option}"
+       in
+        r) DIRS2READ+=(${OPTARG});;
+        w) DIRS2WRITE+=(${OPTARG});;
+        e) EMPTYCHECK=1;;
+        v) VERBOSELVL=1;;
+        d) DEBUG=1;;
+        h)
+           printHelp
+           exit 0
+        ;;
+        \?)
+           printHelp
+           exit 1
+        ;;
+      esac
+    done
+    if [ ${#DIRS2READ[@]} -gt 0 ]; then
+      DIRS2CHECK[0]=${DIRS2READ[@]}
+    fi
+    if [ ${#DIRS2WRITE[@]} -gt 0 ]; then
+      DIRS2CHECK[1]=${DIRS2WRITE[@]}
+    fi
+    TOTALNRDIRS2CHECK=$((${#DIRS2READ[@]}+${#DIRS2WRITE[@]}))
+    if [ ${TOTALNRDIRS2CHECK} -eq 0 ]; then
+      printHelp
+      exit 1;
+    fi
+  }
