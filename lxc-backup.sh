@@ -12,7 +12,6 @@ SNAPSHOT_RELNOTE=/srv/lxc/backup-relnote
 
 LXC_PATH=$(lxc-config lxc.lxcpath)
 LXC_CONTAINERS=($(lxc-ls))
-LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
 
 
 # EXECUTION
@@ -23,14 +22,6 @@ LXC_CONTAINERS_ACTIVE=($(lxc-ls --active))
         echo -e "No containers to archive found!"
         exit 1;
     fi
-
-#    if [ ${#LXC_CONTAINERS_ACTIVE[@]} -gt 0 ]; then
-#        echo -e "---"
-#        echo -e "${LXC_CONTAINERS_ACTIVE[@]}"
-#        echo -e "---"
-#        echo -e "still active (either running or frozen)!"
-#        exit 1;
-#    fi
 
 
   # ACTUAL TARRING
